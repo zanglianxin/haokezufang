@@ -15,3 +15,13 @@ export const groups = () => {
     }
   })
 }
+
+export const getAllCity = () => {
+  return request({
+    url: '/area/city',
+    method: 'GET',
+    params: {
+      level: 1
+    }
+  })
+}

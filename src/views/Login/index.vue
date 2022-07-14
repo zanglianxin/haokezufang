@@ -1,6 +1,6 @@
 <template>
   <div>
-    <van-nav-bar title="账号登录" left-arrow @click-left="goPreBackBtn" />
+    <Header title="账号登录"></Header>
 
     <van-form @submit="login" class="form">
       <van-field v-model="username" name="用户名" placeholder="请输入账号" />
@@ -23,8 +23,12 @@
 <script>
 import { login } from '@/api/user'
 import { Toast } from 'vant'
+import Header from '@/components/Header'
 export default {
   name: 'Login',
+  components: {
+    Header
+  },
   data() {
     return {
       username: '',
@@ -33,9 +37,6 @@ export default {
     }
   },
   methods: {
-    goPreBackBtn() {
-      this.$router.back()
-    },
     async login() {
       if (
         this.username.trim().length === 0 ||
@@ -44,7 +45,10 @@ export default {
         Toast('用户名或密码不能为空')
         return
       }
-      if (!this.reg.test(this.username.trim()) || !this.reg.test(this.password.trim())) {
+      if (
+        !this.reg.test(this.username.trim()) ||
+        !this.reg.test(this.password.trim())
+      ) {
         Toast('用户名或密码的格式5-8位的字母或数字')
         return
       }
@@ -73,17 +77,6 @@ export default {
 </script>
 
 <style scoped lang="less">
-.van-nav-bar {
-  background-color: #21b97a;
-  :deep(.van-nav-bar__title) {
-    color: #fff;
-    font-size: 18px;
-  }
-  :deep(.van-icon-arrow-left) {
-    color: #fff;
-    font-size: 16px;
-  }
-}
 
 .form {
   margin-top: 20px;

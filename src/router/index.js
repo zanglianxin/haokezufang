@@ -29,6 +29,10 @@ const routes = [
         component: () => import('@/views/Profile')
       }
     ]
+  },
+  {
+    path: '/city',
+    component: () => import('@/views/City')
   }
 ]
 

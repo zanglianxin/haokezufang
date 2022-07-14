@@ -8,7 +8,9 @@
       class="searh-box"
     >
       <template #left>
-        <span class="area-name">北京<van-icon name="arrow-down" /></span>
+        <span class="area-name" @click="goCity"
+          >北京<van-icon name="arrow-down"
+        /></span>
       </template>
       <template #action>
         <van-icon name="map-marked" />
@@ -101,7 +103,11 @@ export default {
     const res2 = await groups()
     this.groups = res2.data.body
   },
-  methods: {}
+  methods: {
+    goCity() {
+      this.$router.push('/city')
+    }
+  }
 }
 </script>
 
