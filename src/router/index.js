@@ -7,6 +7,28 @@ const routes = [
   {
     path: '/login',
     component: () => import('@/views/Login')
+  },
+  {
+    path: '/layout',
+    component: () => import('@/views/Layout'),
+    children: [
+      {
+        path: 'home',
+        component: () => import('@/views/Home')
+      },
+      {
+        path: 'search',
+        component: () => import('@/views/Search')
+      },
+      {
+        path: 'consult',
+        component: () => import('@/views/Consult')
+      },
+      {
+        path: 'profile',
+        component: () => import('@/views/Profile')
+      }
+    ]
   }
 ]
 

@@ -28,7 +28,8 @@ export default {
   data() {
     return {
       username: '',
-      password: ''
+      password: '',
+      reg: /^[a-zA-Z0-9]{5,8}$/
     }
   },
   methods: {
@@ -43,6 +44,10 @@ export default {
         Toast('用户名或密码不能为空')
         return
       }
+      if (!this.reg.test(this.username.trim()) || !this.reg.test(this.password.trim())) {
+        Toast('用户名或密码的格式5-8位的字母或数字')
+        return
+      }
       Toast.loading({
         message: '登录中...',
         forbidClick: true,
@@ -53,6 +58,8 @@ export default {
         console.log(res)
         if (res.data.status === 200) {
           Toast.success('登录成功')
+          localStorage.setItem('token', JSON.stringify(res.data.body.token))
+          this.$router.push('/layout/profile')
         } else {
           Toast.fail(res.data.description)
         }
