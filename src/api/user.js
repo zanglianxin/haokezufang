@@ -17,3 +17,23 @@ export const login = (username, password) => {
     }
   })
 }
+
+export const userDataGet = (token) => {
+  return request({
+    url: '/user',
+    method: 'GET',
+    headers: {
+      authorization: token
+    }
+  })
+}
+
+export const getFavorites = (token) => {
+  return request({
+    url: '/user/favorites',
+    method: 'GET',
+    headers: {
+      authorization: token
+    }
+  })
+}

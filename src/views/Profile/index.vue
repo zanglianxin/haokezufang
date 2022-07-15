@@ -1,6 +1,32 @@
 <template>
   <div>
-    <div class="My_title">
+    <!-- 登录状态 -->
+    <div class="My_title" v-if="tokenTimer">
+      <img
+        src="http://liufusong.top:8080/img/avatar.png"
+        alt="背景图"
+        class="My_bg"
+      />
+      <div class="My_info">
+        <div class="My_myIcon">
+          <div class="My_avatar">
+            <img :src="`http://liufusong.top:8080${data.avatar}`" alt="icon" />
+          </div>
+        </div>
+        <div class="My_user">
+          <div class="My_name">{{ data.nickname }}</div>
+          <div class="My_edit">
+            <van-button type="primary" size="small" @click="loginOut"
+              >退出</van-button
+            >
+          </div>
+          <p>编辑个人资料</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 未登录状态 -->
+    <div class="My_title" v-else>
       <img
         src="http://liufusong.top:8080/img/profile/bg.png"
         alt="背景图"
@@ -25,8 +51,9 @@
         </div>
       </div>
     </div>
+
     <van-grid :column-num="3" :border="false" :icon-size="22">
-      <van-grid-item icon="star-o" text="我的收藏" />
+      <van-grid-item icon="star-o" text="我的收藏" @click="myFavorite" />
       <van-grid-item icon="wap-home-o" text="我的出租" />
       <van-grid-item icon="underway-o" text="看房记录" />
       <van-grid-item icon="credit-pay" text="成为房主" />
@@ -44,11 +71,61 @@
 </template>
 
 <script>
+import { userDataGet } from '@/api/user'
+import { Dialog } from 'vant'
+import { removeToken } from '@/utils'
 export default {
+  data() {
+    return {
+      token: '',
+      tokenTimer: false,
+      data: {},
+      removeToken
+    }
+  },
   methods: {
     login() {
       this.$router.push('/login')
+    },
+    loginOut() {
+      Dialog.confirm({
+        title: '提示',
+        message: '是否确定退出'
+      })
+        .then(() => {
+          this.removeToken()
+          this.tokenTimer = false
+        })
+        .catch(() => {})
+    },
+    myFavorite() {
+      if (!this.tokenTimer) {
+        this.$router.push('/login')
+      } else {
+        this.$router.push('/collection')
+      }
     }
+  },
+  async created() {
+    this.$toast.loading({
+      message: '加载中...',
+      forbidClick: true,
+      duration: 0
+    })
+    this.token = this.$store.state.user.token
+    const res = await userDataGet(this.token)
+    console.log(res)
+    if (res.data.status === 200) {
+      this.tokenTimer = true
+    } else {
+      this.tokenTimer = false
+    }
+    this.data = res.data.body
+    this.$toast.loading({
+      message: '加载中...',
+      forbidClick: true,
+      duration: 1
+    })
   }
 }
 </script>

@@ -5,11 +5,11 @@
       <van-index-anchor
         v-for="(item, index) in FirstPin"
         :key="index"
-        :index="index"
+        :index="item"
       >
         <span>{{ item }}</span>
         <van-cell
-          v-for="(citem, cindex) in (firstName.A)"
+          v-for="(citem, cindex) in firstName[index]"
           :key="cindex"
           :title="citem"
         />
@@ -34,22 +34,27 @@ export default {
         'F',
         'G',
         'H',
+        'I',
         'J',
         'K',
         'L',
         'M',
         'N',
+        'O',
         'P',
         'Q',
         'R',
         'S',
         'T',
+        'U',
+        'V',
         'W',
         'X',
         'Y',
         'Z'
       ],
-      firstName: {}
+      firstName: [],
+      newArr: []
     }
   },
   components: {
@@ -59,16 +64,16 @@ export default {
     const res = await getAllCity()
     this.cityList = res.data.body
     this.FirstPin.forEach((item) => {
-      this.firstName[item] = []
+      this.newArr = []
       this.cityList.forEach((ele) => {
         const first = ele.short.substring(0, 1)
         if (first.toUpperCase() === item) {
-          this.firstName[item].push(ele.label)
+          this.newArr.push(ele.label)
         }
       })
+      this.firstName.push(this.newArr)
     })
     console.log(this.firstName)
-    console.log(this.firstName.A)
   },
   methods: {}
 }

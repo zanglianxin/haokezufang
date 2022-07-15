@@ -62,7 +62,7 @@ export default {
         console.log(res)
         if (res.data.status === 200) {
           Toast.success('登录成功')
-          localStorage.setItem('token', JSON.stringify(res.data.body.token))
+          this.$store.commit('setUser', res.data.body)
           this.$router.push('/layout/profile')
         } else {
           Toast.fail(res.data.description)
