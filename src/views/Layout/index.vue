@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="padding-bottom: 50px">
     <router-view></router-view>
     <van-tabbar v-model="active" route active-color="#81c9b6" inactive-color="#333">
       <van-tabbar-item icon="home-o" to="/layout/home">首页</van-tabbar-item>

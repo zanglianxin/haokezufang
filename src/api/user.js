@@ -18,22 +18,22 @@ export const login = (username, password) => {
   })
 }
 
-export const userDataGet = (token) => {
+export const userDataGet = () => {
   return request({
     url: '/user',
-    method: 'GET',
-    headers: {
-      authorization: token
-    }
+    method: 'GET'
   })
 }
 
-export const getFavorites = (token) => {
+export const getFavorites = () => {
   return request({
     url: '/user/favorites',
-    method: 'GET',
-    headers: {
-      authorization: token
-    }
+    method: 'GET'
+  })
+}
+
+export const published = () => {
+  return request({
+    url: '/user/houses'
   })
 }

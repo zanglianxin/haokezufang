@@ -2,34 +2,14 @@
   <div>
     <Header title="收藏列表"></Header>
 
-    <van-card
-      v-for="(item, index) in houseSrc"
-      :key="index"
-      currency=""
-      :desc="item.desc"
-      :title="item.title"
-      :thumb="`http://liufusong.top:8080${item.houseImg}`"
-    >
-      <template #tags>
-        <van-tag
-          plain
-          type="danger"
-          v-for="(titem, tindex) in item.tags"
-          :key="tindex"
-          >{{ titem }}</van-tag
-        >
-      </template>
-      <template #price>
-        <span>{{ item.price }}</span
-        ><i>元/月</i>
-      </template>
-    </van-card>
+    <HouseLise :houseList="houseSrc"></HouseLise>
   </div>
 </template>
 
 <script>
 import Header from '@/components/Header.vue'
 import { getFavorites } from '@/api/user'
+import HouseLise from '@/components/HouseList.vue'
 export default {
   data() {
     return {
@@ -39,7 +19,8 @@ export default {
     }
   },
   components: {
-    Header
+    Header,
+    HouseLise
   },
   async created() {
     this.token = this.$store.state.user.token
@@ -79,8 +60,8 @@ export default {
       font-weight: bolder;
     }
     i {
-        font-style: normal;
-        color: #fa5741;
+      font-style: normal;
+      color: #fa5741;
     }
   }
 }

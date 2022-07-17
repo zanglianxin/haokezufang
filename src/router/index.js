@@ -41,6 +41,14 @@ const routes = [
   {
     path: '/collection',
     component: () => import('@/views/Collection')
+  },
+  {
+    path: '/sendhouse',
+    component: () => import('@/views/SendHouse')
+  },
+  {
+    path: '/published',
+    component: () => import('@/views/Published')
   }
 ]
 
