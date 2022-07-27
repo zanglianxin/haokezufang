@@ -1,4 +1,5 @@
 import request from '@/utils/request'
+import store from '@/store'
 
 export const swiper = () => {
   return request({
@@ -11,7 +12,7 @@ export const groups = () => {
     url: '/home/groups',
     method: 'GET',
     params: {
-      area: 'AREA|88cff55c-aaa4-e2e0'
+      area: store.state.HKZFcityInfo.value
     }
   })
 }

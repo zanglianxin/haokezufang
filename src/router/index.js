@@ -49,6 +49,14 @@ const routes = [
   {
     path: '/published',
     component: () => import('@/views/Published')
+  },
+  {
+    path: '/details',
+    component: () => import('@/views/HouseDetails')
+  },
+  {
+    path: '/xiaoqu',
+    component: () => import('@/views/SendHouse/components/xiaoqu')
   }
 ]
 

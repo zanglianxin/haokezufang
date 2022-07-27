@@ -7,6 +7,7 @@
       :desc="item.desc"
       :title="item.title"
       :thumb="`http://liufusong.top:8080${item.houseImg}`"
+      @click="getHouseInfo(item.houseCode)"
     >
       <template #tags>
         <van-tag
@@ -31,6 +32,13 @@ export default {
     houseList: {
       type: Array,
       default: () => []
+    }
+  },
+  methods: {
+    getHouseInfo(code) {
+      // console.log(code)
+      this.$store.commit('setHouseCode', code)
+      this.$router.push('/details')
     }
   }
 }
@@ -61,8 +69,8 @@ export default {
       font-weight: bolder;
     }
     i {
-        font-style: normal;
-        color: #fa5741;
+      font-style: normal;
+      color: #fa5741;
     }
   }
 }

@@ -23,11 +23,21 @@ export default {
     HouseLise
   },
   async created() {
+    this.$toast.loading({
+      message: '加载中...',
+      forbidClick: true,
+      duration: 0
+    })
     this.token = this.$store.state.user.token
     try {
       const res = await this.getFavorites(this.token)
       console.log(res)
       this.houseSrc = res.data.body
+      this.$toast.loading({
+        message: '加载中...',
+        forbidClick: true,
+        duration: 1
+      })
     } catch (error) {
       console.log(error)
     }

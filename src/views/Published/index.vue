@@ -21,9 +21,19 @@ export default {
     HouseList
   },
   async created() {
+    this.$toast.loading({
+      message: '加载中...',
+      forbidClick: true,
+      duration: 0
+    })
     const { data } = await published()
     console.log(data)
     this.publishedList = data.body
+    this.$toast.loading({
+      message: '加载中...',
+      forbidClick: true,
+      duration: 1
+    })
   }
 }
 </script>
